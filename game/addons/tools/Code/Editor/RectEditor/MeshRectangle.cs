@@ -153,7 +153,7 @@ public partial class Document
 					BuildUnwrappedMeshWithSquareMapping();
 					break;
 				case MappingMode.Planar:
-					var cameraRot = SceneViewportWidget.LastSelected.State.CameraRotation;
+					var cameraRot = SceneViewWidget.Current.LastSelectedViewportWidget.State.CameraRotation;
 					BuildUnwrappedMeshWithPlanarMapping( cameraRot.Left, cameraRot.Up );
 					break;
 				case MappingMode.UseExisting:
