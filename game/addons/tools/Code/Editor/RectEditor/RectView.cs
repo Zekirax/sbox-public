@@ -449,28 +449,45 @@ public class RectView : Widget
 
 	void RenderMaterial( Material material, Vector2 size )
 	{
-		var world = new SceneWorld
-		{
-			AmbientLightColor = Color.White
-		};
+		var world = new SceneWorld();
 
 		var camera = new SceneCamera
 		{
-			BackgroundColor = Color.Red,
+			BackgroundColor = Color.Black,
 			Ortho = true,
-			Position = Vector3.Backward,
-			Rotation = Rotation.Identity,
+			Rotation = Rotation.FromPitch( 90 ),
+			Position = Vector3.Up * 200,
 			OrthoHeight = 100,
-			AmbientLightColor = Color.White,
 			World = world
 		};
 
+		var light = new SceneLight( world )
+		{
+			Radius = 4000,
+			LightColor = Color.White * 0.8f,
+			Position = new Vector3( 0, 0, 100 ),
+			ShadowsEnabled = true
+		};
+
+		var debugMode = Session.Settings.FastTextureSettings.DebugMode;
+
+		camera.DebugMode = debugMode switch
+		{
+			DebugMode.Default => SceneCameraDebugMode.Normal,
+			DebugMode.Roughness => SceneCameraDebugMode.Roughness,
+			DebugMode.Normals => SceneCameraDebugMode.NormalMap,
+			_ => SceneCameraDebugMode.Normal,
+		};
+
 		var model = Model.Load( "models/dev/plane_blend.vmdl" );
-		var obj = new SceneObject( world, model )
+		var obj = new SceneObject( world, model );
+		obj.Transform = new Transform
 		{
 			Position = Vector3.Zero,
-			Rotation = Rotation.From( 90, 180, 0 ),
+			Rotation = Rotation.From( 0, 180, 0 ),
+			Scale = new Vector3( 1, size.x / size.y, 1 )
 		};
+
 		obj.SetMaterialOverride( material );
 
 		SourceImage = new Pixmap( size );
