@@ -226,6 +226,19 @@ internal sealed partial class NetworkObject : IValid, IDeltaSnapshot
 		GameObject.Destroy();
 	}
 
+	/// <summary>
+	/// Send a detach message to all other clients. Only the host can detach
+	/// a networked object.
+	/// </summary>
+	internal void SendNetworkDetach()
+	{
+		if ( SceneNetworkSystem.Instance is null ) return;
+		if ( Networking.IsDisconnecting ) return;
+		if ( !Networking.IsHost ) return;
+
+		SceneNetworkSystem.Instance.NetworkDetachBroadcast( this );
+	}
+
 	internal void SendNetworkDestroy()
 	{
 		if ( SceneNetworkSystem.Instance is null ) return;
