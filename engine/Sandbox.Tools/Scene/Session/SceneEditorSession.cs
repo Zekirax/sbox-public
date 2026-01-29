@@ -267,7 +267,7 @@ public partial class SceneEditorSession : Scene.ISceneEditorSession
 	/// <summary>
 	/// Zoom the scene to view this bbox
 	/// </summary>
-	public void FrameTo( in BBox box )
+	public virtual void FrameTo( in BBox box )
 	{
 		BringToFront();
 		OnFrameTo?.Invoke( box );
