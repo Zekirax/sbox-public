@@ -262,6 +262,7 @@ public sealed partial class NavMesh : IDisposable
 
 		try
 		{
+			IsEnabled = true;
 			IsGenerating = true;
 
 			Init();
@@ -290,6 +291,7 @@ public sealed partial class NavMesh : IDisposable
 
 		try
 		{
+			IsEnabled = true;
 			IsGenerating = true;
 
 			Init();
@@ -302,6 +304,7 @@ public sealed partial class NavMesh : IDisposable
 		{
 			IsGenerating = false;
 			IsDirty = false;
+			IsLoaded = true;
 		}
 
 		return true;

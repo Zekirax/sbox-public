@@ -74,8 +74,7 @@ public sealed partial class NavMesh
 	{
 		ThreadSafe.AssertIsMainThread();
 
-		if ( !IsEnabled )
-			await Task.CompletedTask;
+		if ( !IsEnabled ) return;
 
 		var tilePosition = WorldPositionToTilePosition( worldPosition );
 		var tile = tileCache.GetOrAddTile( tilePosition );
@@ -129,8 +128,7 @@ public sealed partial class NavMesh
 	{
 		ThreadSafe.AssertIsMainThread();
 
-		if ( !IsEnabled )
-			await Task.CompletedTask;
+		if ( !IsEnabled ) return;
 
 		var minMaxTileCoords = CalculateMinMaxTileCoords( bounds );
 
