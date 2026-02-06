@@ -569,7 +569,7 @@ public sealed partial class ParticleEffect : Component, Component.ExecuteInEdito
 			var friction = Friction.Evaluate( p, 7579 );
 			var bumpiness = Bumpiness.Evaluate( p, 2380 );
 			var push = PushStrength.Evaluate( p, 5281 );
-			var die = DieOnCollisionChance.Evaluate( p, 4582 ) > 0.5f;
+			var die = DieOnCollisionChance.Evaluate( p, 4582 ) > Random.Shared.Float( 0, 1 );
 			var radius = MathF.Max( 0.01f, CollisionRadius );
 
 			if ( Scene.IsEditor ) push = 0;
